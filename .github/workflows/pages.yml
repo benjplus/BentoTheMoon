@@ -12,14 +12,23 @@ permissions:
 
 jobs:
   build:
+    name: Qualité du site
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version-file: .nvmrc
+          cache: npm
+      - name: Installer les outils de contrôle
+        run: npm ci --ignore-scripts
       - name: Vérifier et construire
         run: npm run build
+      - name: Installer Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Vérifier accessibilité, clavier et liens
+        run: npm run test:site
       - name: Préparer Pages
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         uses: actions/configure-pages@v5

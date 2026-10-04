@@ -11,6 +11,8 @@ Site vitrine statique en français pour un réparateur informatique.
 - Maintenir l'accessibilité : clavier, focus visible, contrastes, titres cohérents.
 - Lancer `npm run build` après une modification et vérifier l'affichage pour les changements visuels.
 - Le workflow vérifie les pull requests ; seul `main` est déployé.
+- Les modifications passent par une branche et une pull request. Le contrôle `Qualité du site` doit réussir avant fusion dans `main` ; ne pas contourner la protection de branche.
+- Lancer `npm run test:site` après construction pour contrôler l'accessibilité automatique, le clavier, les liens et le débordement horizontal sur ordinateur et mobile. Ces tests complètent la vérification visuelle et ne certifient pas à eux seuls l'accessibilité.
 - Ne jamais placer de secrets dans `src/` : tout son contenu est public.
 - Avant chaque commit et publication, vérifier tous les fichiers suivis, les changements et l'historique Git destiné au push pour détecter secrets, jetons, clés privées, mots de passe et données personnelles non destinées à être publiques. Le dépôt GitHub lui-même est public, pas seulement `src/`.
 - Contrôler aussi `dist/`, l'artefact GitHub Pages et les fichiers réellement servis après déploiement. Publier uniquement les fichiers nécessaires au site ; exclure configurations locales, fichiers `.env`, journaux et sauvegardes.

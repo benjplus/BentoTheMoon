@@ -4,13 +4,15 @@ Socle du site vitrine de BentoTheMoon, réparateur informatique. HTML/CSS statiq
 
 ## Développement
 
-Node.js 24 ou supérieur. Aucune installation npm nécessaire.
+Node.js 24 ou supérieur. `npm ci --ignore-scripts` installe les outils de contrôle, sans ajouter de dépendance au site public.
 
 ```sh
 npm run dev      # http://127.0.0.1:4321
 npm run check    # HTML et existence des liens locaux
 npm run build    # vérification puis copie de src/ vers dist/
 npm run preview  # aperçu de dist/ après construction
+npx playwright install chromium # installation initiale du navigateur de test
+npm run test:site # accessibilité, clavier, liens et responsive (après build)
 ```
 
 `PORT` permet de changer le port. Le serveur écoute uniquement sur la machine locale.
@@ -58,3 +60,9 @@ Référence : [workflows personnalisés GitHub Pages](https://docs.github.com/en
 ## Prochaines étapes
 
 Définir les services, la zone d'intervention, les coordonnées, l'identité visuelle et les informations légales avant de construire le site complet. Ajouter un domaine personnalisé seulement lorsqu'il est connu.
+
+## Qualité et sécurité GitHub
+
+Dependabot propose chaque semaine les mises à jour des GitHub Actions et des outils de test. Le job `Qualité du site` construit le site et contrôle les liens, les ressources, l'accessibilité automatique, la navigation clavier et l'absence de débordement horizontal sur ordinateur et mobile. Les contrôles automatiques ne remplacent pas une revue visuelle et humaine de l'accessibilité.
+
+La branche `main` exige une pull request et le contrôle de qualité réussi avant fusion ; les pushs forcés et suppressions sont interdits. Aucun avis d'un second contributeur n'est imposé pour permettre le travail en solo. La détection des secrets et la protection des pushs sont activées sur GitHub ; les données personnelles restent à vérifier selon `AGENTS.md`.
